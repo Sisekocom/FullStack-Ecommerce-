@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>API</title>
+</head>
+<body>
+    <h1>Fullstack-Ecommerce<span>API</span></h1>
+    <table>
+        <caption>
+            <h3>
+                Routes information
+            </h3>
+        </caption>
+        <thead>
+            <th>Routes</th>
+            <th>HTTP methods</th>
+            <th>Description</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>/</td>
+                <td>GET</td>
+                <td>Render an index.html</td>
+            </tr>
+            <tr>
+                <td>/api/users/register</td>
+                <td>POST</td>
+                <td>Register a new user</td>
+            </tr>
+            <tr>
+                <td>/api/users/login</td>
+                <td>POST</td>
+                <td>User login</td>
+            </tr>
+            <tr>
+                <td>/api/users/profile</td>
+                <td>GET</td>
+                <td>Get user profile (protected)</td>
+            </tr>
+            <tr>
+                <td>/api/users/profile/update</td>
+                <td>PUT</td>
+                <td>Update user profile (protected)</td>
+            </tr>
+            <tr>
+                <td>/api/products</td>
+                <td>GET</td>
+                <td>Get list of all products</td>
+            </tr>
+            <tr>
+                <td>/api/products/:id</td>
+                <td>GET</td>
+                <td>Get details of a specific product</td>
+            </tr>
+            <tr>
+                <td>/api/products</td>
+                <td>POST</td>
+                <td>Add a new product (admin protected)</td>
+            </tr>
+            <tr>
+                <td>/api/products/:id</td>
+                <td>PUT</td>
+                <td>Update a product (admin protected)</td>
+            </tr>
+            <tr>
+                <td>/api/products/:id</td>
+                <td>DELETE</td>
+                <td>Delete a product (admin protected)</td>
+            </tr>
+            <tr>
+                <td colspan="3">Note: Some routes are protected and require authentication. Admin routes require admin privileges.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
