@@ -1,3 +1,4 @@
+
 import express from 'express'
 import bodyParser from 'body-parser'
 import { users } from '../model/index.js'
@@ -72,3 +73,4 @@ userRouter.post('/login', bodyParser.json(), (req, res)=>{
 export{
     userRouter, express
 }
+
