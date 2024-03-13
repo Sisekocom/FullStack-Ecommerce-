@@ -4,71 +4,70 @@ class Orders{
         const qry = `
         SELECT orderID, userID,prodID, orderDate
         FROM orders;
-        `
+        `;
         db.query(qry, (err, results)=>{
-            if(err) throw err 
+            if(err) throw err;
             res.json({
                 status: res.statusCode,
-                results
-            })
-        })
+                results,
+            });
+        });
     }
-    fetchProduct(req, res){
+    fetchOrder(req, res){
         const qry = `
         SELECT orderID, userID,prodID, orderDate
-        FROM orders;
-        FROM orders
+       
         WHERE orderID = ${req.params.id};
-        `
-        db.query(qry, (err, result)=>{
-            if(err) throw err 
+        `;
+        db.query(qry, (err, result)=> {
+            if(err) throw err;
             res.json({
                 status: res.statusCode,
-                result: result[0]
-            })
-        })
+                result: result[0],
+            });
+        });
     }
-    addProduct(req, res) {
+    addOrder(req, res) {
         const qry = `
         INSERT INTO orders
         SET ?;
-        `
+        `;
         db.query(qry, [req.body], (err)=>{
             if(err) throw err 
             res.json({
                 status: res.statusCode, 
-                msg: 'New orders was added'
-            })
-        })
+                msg: 'New orders was added',
+            });
+        });
     }
-    updateProduct(req, res) {
+    updateOrder(req, res) {
         const qry = `
         UPDATE orders
         SET ?
         WHERE orderID = ${req.params.id};
-        `
+        `;
         db.query(qry, [req.body], (err)=>{
             if(err) throw err
             res.json({
                 status: res.statusCode, 
                 msg: "The product information has been updated."
-            })
-        })
+            });
+        });
     }
-    deleteProduct(req, res) {
+    deleteOrder(req, res) {
         const qry = `
         DELETE FROM orders
         WHERE orderID = ${req.params.id};
-        `
+        `;
         db.query(qry, (err)=>{
-            if(err) throw err 
+            if(err) throw err;
             res.json({
                 status: res.statusCode, 
-                msg: "The order information has been deleted."
-            })
-        })
+                msg: "The order information has been deleted.",
+            });
+        });
     }
 }
 export {
     Orders
-}
+};

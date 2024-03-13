@@ -1,11 +1,12 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import { products } from '../model/index.js'
-
+import { verifyAToken } 
+from "../middleware/AuthenticateUser.js"
 const productRouter = express.Router()
 
 // Fetch all products
-productRouter.get('/', (req, res)=>{
+productRouter.get('/',verifyAToken, (req, res)=>{
     try{
         products.fetchProducts(req, res)
     }catch(e) {

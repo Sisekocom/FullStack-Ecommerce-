@@ -32,7 +32,7 @@ class Products {
   }
   addProduct(req, res) {
     const qry = `
-        INSERT INTO Products
+        INSERT INTO products
         SET ?;
         `;
     db.query(qry, [req.body], (err) => {
@@ -45,7 +45,7 @@ class Products {
   }
   updateProduct(req, res) {
     const qry = `
-        UPDATE Products
+        UPDATE products
         SET ?
         WHERE prodID = ${req.params.id};
         `;
@@ -59,7 +59,7 @@ class Products {
   }
   deleteProduct(req, res) {
     const qry = `
-        DELETE FROM Products
+        DELETE FROM products
         WHERE prodID = ${req.params.id};
         `;
     db.query(qry, (err) => {

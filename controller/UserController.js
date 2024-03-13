@@ -5,8 +5,8 @@ import { users } from '../model/index.js'
 import { verifyAToken } 
 from "../middleware/AuthenticateUser.js"
 const userRouter = express.Router()
-// Fetch users
-userRouter.get('/', (req, res)=>{
+
+userRouter.get('/', verifyAToken, (req, res)=>{
     try{
         users.fetchUsers(req, res)
     }catch(e) {
@@ -16,7 +16,7 @@ userRouter.get('/', (req, res)=>{
         })
     }
 })
-// Fetch user
+
 userRouter.get('/:id', (req, res)=>{
     try{
         users.fetchUser(req, res)
@@ -27,7 +27,7 @@ userRouter.get('/:id', (req, res)=>{
         })
     }
 })
-// Add a user
+
 userRouter.post('/register', bodyParser.json(), (req, res)=>{
     try{
         users.createUser(req, res)

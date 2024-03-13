@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { createPool } from "mysql";
 // import { config } from "dotenv";
 // config()

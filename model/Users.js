@@ -52,11 +52,11 @@ class Users {
         userPass: data.userPass
       };
       const qry = `INSERT INTO users SET ?;`;
-      db.query(qry,  (err) => {
+      db.query(qry, [data], (err) => {
         if (err) {
           res.status(400).json({
             status: res.statusCode,
-            msg: "This email address already exists",
+            msg: err,
           });
         } else {
           let token = createToken(user);
@@ -121,13 +121,13 @@ class Users {
   }
 
   login(req, res) {
-    const { emailAdd, userPass } = req.body;
+    const { emailAdd,userPass } = req.body;
     const qry = `
       SELECT userID, firstName, lastName, userAge, gender, emailAdd, userPass, userRole
       FROM users
-      WHERE emailAdd = ?;
+      WHERE emailAdd = '${emailAdd}';
     `;
-    db.query(qry, [emailAdd], async (err, result) => {
+    db.query(qry, async (err, result) => {
       if (err) {
         res.status(500).json({
           status: res.statusCode,
