@@ -6,7 +6,7 @@ from "../middleware/AuthenticateUser.js"
 const productRouter = express.Router()
 
 // Fetch all products
-productRouter.get('/',verifyAToken, (req, res)=>{
+productRouter.get('/', (req, res)=>{
     try{
         products.fetchProducts(req, res)
     }catch(e) {
