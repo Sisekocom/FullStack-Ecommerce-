@@ -121,13 +121,13 @@ class Users {
   }
 
   login(req, res) {
-    const { emailAdd,userPass } = req.body;
+    const { emailAdd, userPass } = req.body;
     const qry = `
       SELECT userID, firstName, lastName, userAge, gender, emailAdd, userPass, userRole
       FROM users
-      WHERE emailAdd = '${emailAdd}';
+      WHERE emailAdd = ?;
     `;
-    db.query(qry, async (err, result) => {
+    db.query(qry, [emailAdd], async (err, result) => {
       if (err) {
         res.status(500).json({
           status: res.statusCode,
@@ -135,7 +135,7 @@ class Users {
         });
       } else {
         if (!result?.length) {
-          res.json({
+          res.status(401).json({
             status: res.statusCode,
             msg: "You provided a wrong email address.",
           });
@@ -153,7 +153,7 @@ class Users {
               result: result[0],
             });
           } else {
-            res.json({
+            res.status(401).json({
               status: res.statusCode,
               msg: "Please provide the correct password.",
             });
@@ -162,6 +162,9 @@ class Users {
       }
     });
   }
-}
+      }
+      
+    
+  
 
 export { Users };
