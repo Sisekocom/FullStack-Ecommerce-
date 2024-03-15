@@ -6,17 +6,20 @@
           <div class="navbar-nav ml-auto">
             <router-link class="nav-item nav-link KK" to="/Faq"> FAQ</router-link>
             <!-- <router-link class="nav-item nav-link KK" to="/checkout">Orders </router-link> -->
+            <!-- <router-link class="nav-item nav-link yK v-show=products" to="/Login"> LOGIN</router-link> -->
             <router-link class="nav-item nav-link KK" to="/registration">Register</router-link>
             <router-link class="nav-item nav-link KK" to="/about">ABOUT</router-link>
             <!-- <router-link class="nav-item nav-link KK" to="/"> HOME </router-link> -->
             <!-- <router-link class="nav-item nav-link yK v-show=products" to="/Login"> LOGIN</router-link> -->
         
           
-        <img href="" height="100px" width="100px" src="https://i.postimg.cc/d0bpKTM7/R-removebg-preview-1.png" alt="">
+        <!-- <img href="" height="100px" width="100px" src="https://i.postimg.cc/d0bpKTM7/R-removebg-preview-1.png" alt=""> -->
+       
  
           </div>
         </div>
       </div>
+       <router-link class="nav-item nav-link yK v-show=products" to="/Login"> LOGIN</router-link>
     </nav>
     <!-- <router-link class="dropdown-item" to="/registration">REGISTER</router-link> -->
   </template>

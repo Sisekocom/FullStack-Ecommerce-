@@ -1,4 +1,4 @@
-<template class="container">
+<template class="container-fluid">
 
   <!-- <NavBar /> -->
 <main>
@@ -12,7 +12,7 @@
 import FooteR from './components/FooteR.vue';
 // import NavBar from './components/NavBar.vue'
 export default {
-components: {
+components:   {
   // NavBar,
  FooteR
 }
@@ -22,11 +22,11 @@ components: {
 
 <style>
 
-#pic{
+/* #pic{ */
 /* background-size: cover;
 background-repeat: no-repeat;
 background-image: url("https://i.ibb.co/JzjB5rk/giphy-1.gif"); */
-padding-top: 11%;}
+/* padding-top: 11%;} */
 
 body{
 
@@ -39,13 +39,13 @@ background-repeat: no-repeat;
 
 
 #app {
-/* font-family:  Helvetica, Arial, sans-serif; */
+font-family:  Helvetica, Arial, sans-serif;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 text-align: center;
 color: #fafafa;
 font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
+  /* font-optical-sizing: auto; */
  
 }
 
@@ -74,14 +74,14 @@ color: white !important ;
 
  } *
 
-/* nav a.router-link-exact-active { */
-/* color: rgb(228, 255, 53) !important; */
+nav a.router-link-exact-active {
+color: rgb(228, 255, 53) !important;
 /* margin-left: -80%; */
-/* font-family: "Rubik", sans-serif; */
+font-family: "Rubik", sans-serif;
 
-/* } */
-/* 
-img[alt='logo'] {
+} 
+
+/* img[alt='logo'] {
 width: 5rem !important;
 margin-top: -50% !important;
 aspect-ratio: 1/1 !important;
@@ -102,15 +102,15 @@ font-style: normal !important;
 
 
 }
-.container {
+ .container {
 max-width: 1200px;
 margin: 0 auto;
-padding: 0 15px;
-}
-
-/* main {
+padding:  15px;
+} 
+/* 
+main {
 padding: 20px;
-} */
+}  */
 
 /* nav {
 padding: 20px;
@@ -123,9 +123,9 @@ aspect-ratio: 1/1;
 } */
 
 .nav-item {
-font-size: large;
-font-weight: bold;
-color: rgba(255, 255, 255, 0.818);
+/* font-size: large; */
+/* font-weight: bold; */
+/* color: rgba(255, 255, 255, 0.818); */
 /* font-family: "Rubik Bubbles", system-ui; */
 }
 

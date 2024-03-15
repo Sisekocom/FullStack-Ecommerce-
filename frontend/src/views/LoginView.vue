@@ -10,15 +10,15 @@
               <form>
                 <div class="form-group">
                   <label for="username">Email Address</label>
-                  <input type="text" id="username" v-model="info.emailAdd" class="form-control form-control-lg"
+                  <input type="text" id="username" v-model="payload.emailAdd" class="form-control form-control-lg"
                     placeholder="Enter your email" required>
                 </div>
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input type="password" id="password" v-model="info.UserPass" class="form-control form-control-lg"
+                  <input type="password" id="password" v-model="payload.userPass" class="form-control form-control-lg"
                     placeholder="Enter your password" required>
                 </div>
-                <button @click.prevent="login()" type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+                <button @click.prevent="log()" type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
               </form>
             </div>
           </div>
@@ -32,26 +32,29 @@
 import NavBar from '../components/NavBar.vue';
 
 export default {
-  name: 'LoginForm',
+  name: 'LoginView',
   components: {
     NavBar
   },
   data() {
     return {
-      info: {
-        emailAdd: null,
-        UserPass: null,
+      payload: {
+        emailAdd: '',
+        userPass: '',
       }
     };
   },
   methods: {
-    login() {
-      this.$store.dispatch("login", this.info)
+    async log() {
+      try {
+        await this.$store.dispatch("login", this.payload);
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 };
 </script>
-
 <style scoped>
 .login-card {
   border: none;

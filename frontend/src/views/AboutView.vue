@@ -1,6 +1,5 @@
 <template>
-  <NavbaAbout />
-
+  <NavBBar />
   <div class="container-fluid">
     <h1>Welcome to DataCore Innovations</h1>
     <p>{{ aboutView }}</p>
@@ -8,11 +7,11 @@
 </template>
 
 <script>
-import NavbaAbout from '../components/NavbaAbout'
+import NavBBar from '../components/NavBBar.vue'
 
 export default {
   components :{
-    NavbaAbout
+    NavBBar
   },
   data() {
     return {
