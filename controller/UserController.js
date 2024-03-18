@@ -60,6 +60,17 @@ userRouter.delete('/delete/:id', (req, res)=>{
     }
     
 })
+userRouter.patch('/update/:id', bodyParser.json(), (req, res) => {
+    try {
+      users.updateUser(req, res);
+    } catch (e) {
+      res.json({
+        status: res.statusCode,
+        msg: "Failed to update a user"
+      });
+    }
+  });
+  
 userRouter.post('/login', bodyParser.json(), (req, res)=>{
     try{
         users.login(req, res)

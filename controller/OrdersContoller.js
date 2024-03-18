@@ -11,6 +11,7 @@ orderRouter.get('/', (req, res)=>{
         orders.fetchAllOrders(req, res)
     }catch(e) {
         res.json({
+            
             status: res.statusCode,
             msg: 'Failed to retrieve order'
         })
