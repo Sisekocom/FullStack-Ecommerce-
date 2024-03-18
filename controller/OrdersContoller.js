@@ -6,7 +6,7 @@ from "../middleware/AuthenticateUser.js"
 const orderRouter = express.Router()
 
 
-orderRouter.get('/',verifyAToken, (req, res)=>{
+orderRouter.get('/', (req, res)=>{
     try{
         products.fetchOrders(req, res)
     }catch(e) {
@@ -57,4 +57,6 @@ orderRouter.delete('/delete/:id', (req, res)=>{
     }
 })
 export
-{orderRouter};
+{
+    orderRouter
+}
