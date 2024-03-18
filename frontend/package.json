@@ -12,15 +12,16 @@
     "bootstrap": "^5.3.3",
     "core-js": "^3.8.3",
     "cors": "^2.8.5",
+    "jquery": "^3.7.1",
     "mysql": "^2.18.1",
     "register-service-worker": "^1.7.2",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.10.6",
     "vue": "^3.2.13",
     "vue-cookies": "^1.8.3",
-    "vue-router": "^4.0.3",
+    "vue-router": "^4.3.0",
     "vue3-cookies": "^1.0.6",
-    "vuex": "^4.0.0"
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

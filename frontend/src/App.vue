@@ -1,168 +1,91 @@
-<template class="container-fluid">
-
-  <!-- <NavBar /> -->
-<main>
-  <router-view />
-</main>
-<FooteR /> 
-
+<template>
+  <main class="container-fluid">
+    <router-view />
+  </main>
+  <FooteR />
 </template>
 
 <script>
 import FooteR from './components/FooteR.vue';
-// import NavBar from './components/NavBar.vue'
-export default {
-components:   {
-  // NavBar,
- FooteR
-}
-}
 
+export default {
+  components: {
+    FooteR
+  }
+}
 </script>
 
 <style>
-
-/* #pic{ */
-/* background-size: cover;
-background-repeat: no-repeat;
-background-image: url("https://i.ibb.co/JzjB5rk/giphy-1.gif"); */
-/* padding-top: 11%;} */
-
-body{
-
-
-background-size: cover;
-background-repeat: no-repeat;
-
-
+body {
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  background-color: rgba(2, 2, 2, 0.916);
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  color: #fafafa;
+  background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/d863b251633935.58f521c2e013a.gif);
+  /* max-width: 100%;
+  height: auto; */
 }
-
 
 #app {
-font-family:  Helvetica, Arial, sans-serif;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-text-align: center;
-color: #fafafa;
-font-family: "Rubik", sans-serif;
-  /* font-optical-sizing: auto; */
- 
+  text-align: center;
 }
 
+.container-fluid {
+  margin: 0 auto;
+  padding: 0 15px; 
+  max-width: 100%;
+}
 
 nav {
-padding: 40px;
-a {
-font-weight: bold;
-color: #2c3e50 !important;}}
-
-
-
- nav  { 
-background: rgba(52, 44, 44, 0.402) !important;
-text-align: right !important; 
-
-
- }  
+  background: rgba(52, 44, 44, 0.402) !important;
+  text-align: right;
+  padding: 20px;
+  margin-bottom: 20px; 
+}
 
 nav a {
-font-weight: bold !important;
-color: white !important ; 
-
-
-
-
- } *
+  font-weight: bold !important;
+  color: white !important;
+}
 
 nav a.router-link-exact-active {
-color: rgb(228, 255, 53) !important;
-/* margin-left: -80%; */
-font-family: "Rubik", sans-serif;
-
-} 
-
-/* img[alt='logo'] {
-width: 5rem !important;
-margin-top: -50% !important;
-aspect-ratio: 1/1 !important;
-} */
-
-
-
-.nav-item {
-font-size: large !important;
-font-weight: bold !important;
-/* margin-left: 4% !important; */
-/* color: rgb(5, 5, 5); */
-color: rgba(255, 255, 255, 0.818) !important;
-font-family: "Rubik Bubbles", system-ui !important;
-/* font-weight: 400 !important; */
-font-style: normal !important;
-/* background-color: #b95842 !important; */
-
-
-}
- .container {
-max-width: 1200px;
-margin: 0 auto;
-padding:  15px;
-} 
-/* 
-main {
-padding: 20px;
-}  */
-
-/* nav {
-padding: 20px;
-} */
-
-/* img[alt='logo'] {
-width: 5rem;
-margin-top: -50%;
-aspect-ratio: 1/1;
-} */
-
-.nav-item {
-/* font-size: large; */
-/* font-weight: bold; */
-/* color: rgba(255, 255, 255, 0.818); */
-/* font-family: "Rubik Bubbles", system-ui; */
+  color: rgb(228, 255, 53) !important;
+  font-family: "Rubik", sans-serif;
 }
 
-/* Responsive Styles */
+.nav-item {
+  font-size: large;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.818);
+  font-family: "Rubik Bubbles", system-ui;
+  float: right;
+  display: block;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
 @media (max-width: 768px) {
-img[alt='logo'] {
-width: 4rem;
-margin-top: -30%;
+  .container-fluid {
+    padding: 0 10px; 
+  }
+
+  nav {
+    padding: 10px;
+    margin-bottom: 10px; 
+  }
+
+  .nav-item {
+    font-size: medium;
+  }
+
+  nav, .nav-item {
+    text-align: center;
+    float: none;
+  }
 }
-
-/* nav {
-padding: 10px;
-} */
-
-.nav-item {
-font-size: medium;
-}
-}
-
-
-body{
-/* overflow-x: hidden;    */
-/* background-image: url(); */
-             background-color: rgba(2, 2, 2, 0.916);
-background-image: url(https://www.bing.com/th/id/OGC.0e5bd0ac099a214e98426eead080f4c4?pid=1.7&rurl=https%3a%2f%2fi.gifer.com%2f7S7F.gif&ehk=cTu90sfWNB6uPC8xsjj0n12YmX4YaBicSN0WYwWTrdc%3d);
-/* background-image: url() !important; */
-}
-.nav-item{
-
-float: right !important;
-display: block !important;
-text-align: right !important;
-
-text-transform: capitalize !important;
-text-decoration: none !important;
-
-}
-
-
 </style>

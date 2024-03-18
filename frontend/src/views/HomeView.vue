@@ -1,110 +1,89 @@
 <template>
-  <NavbarHome />
-  <main class="" id="fo" >
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" -->
-  />
-    <div class="container text-center mt-5 animate__animated animate__swing animate__backInDown">
-      <div class="text ">
-        <span id="landingP" class="landingP rotate-3d bold p " data-char="#">WELCOME</span>
-        <span id="landingP" class="landingP rotate-3d bold " data-char="#">TO</span>
-        <span id="landingP" class="landingP rotate-3d bold " data-char="#"> DataCore</span>
-        <span id="landingP" class="landingP rotate-3d bold " data-char="#">Innovations. </span>
-         <router-link to="/products">
-          <img height="170px" width="170px" id="B"
-            src="https://www.bing.com/th/id/OGC.eec74a195dc966cafb9052d2ebe4fb7f?pid=1.7&rurl=https%3a%2f%2fi.pinimg.com%2foriginals%2f0f%2fe6%2f62%2f0fe66229dd01d34b5d89f681d97ded29.gif&ehk=X8vJHvsITL6Q5aGj%2boDhQRUENLQQhHGn9MDWtQuQp3Y%3d"
-            loading="lazy" alt="takesmeproductpage">
-        </router-link> 
-      </div>
-    </div>  
+  <NavBar />
+  <main class="container text-center mt-5">
+    <div class="text animate__animated animate__zoomInRight animate__jackInTheBox"> 
+      <span class="landingP bold">WELCOME</span>
+      <span class="space"></span>
+      <span class="landingP bold">TO</span>
+      <span class="space"></span>
+      <span class="landingP bold">DataCore</span>
+      <span class="space"></span>
+      <span class="landingP bold animate__animated animate__bounceInRight">Innovations.</span>
+    </div>
+    <FaqView />
   </main>
-
 </template>
 
 <script>
-
-import NavbarHome from '../components/NavbarHome'
+import NavBar from '../components/NavbaAbout'
+import FaqView from '../views/FaqView'
 
 export default {
+  components: {
+    NavBar,
+    FaqView
+  },
   name: 'LandingPage',
-  
-  components :{
-    NavbarHome
-  }
 };
 </script>
 
 <style scoped>
-
-/* .text {
-  color: aliceblue !important;
-  padding: 80px !important;
-  font-size: xx-large !important;
+.text {
+  color: aliceblue;
+  padding: 80px;
+  font-size: x-large;
+  perspective: 1000px; 
 }
 
-#B {
-  border-radius: 50% !important;
-  margin-left: 65px !important; 
-} */
-
-/* #landingP {
-  font-family: "Honk", system-ui !important;  
-  font-weight: 400 !important;
-  font-style: normal !important;
-  background-color: rgb(23, 70, 29) !important;
-  font-weight: bold !important;
-  font-size: 8.1rem !important; 
-  margin-bottom: 3% !important;
-  border-radius: 10% !important;
-  box-shadow: 0 0 50px rgba(2, 255, 65, 0.301) !important;
+.landingP {
+  font-family: "Orbitron", sans-serif;  
+  font-weight: bold;
+  font-size: 4.2rem;
+  margin-bottom: 3%;
+  border-radius: 10%;
+  box-shadow: 0 0 50px rgba(255, 2, 2, 0.301);
+  margin: 1%;
+  display: inline-block;
+  transform-style: preserve-3d;
+  animation: float 200s infinite, colorChange 50s infinite alternate; /* Add a floating and color-changing animation */
 }
 
-.rotate-3d {
-  display: inline-block !important;
-  transform-style: preserve-3d !important;
-  transform: perspective(1000px) rotateY(20deg) !important;
-  transition: transform 0.5s !important;
+@keyframes float {
+  0%, 100% { transform: rotateY(0deg) translateZ(0); }
+  50% { transform: rotateY(360deg) translateZ(50px); }
 }
 
-.rotate-3d:hover {
-  transform: perspective(1000px) rotateY(360deg) !important;
-} */
-
+@keyframes colorChange {
+  0%, 100% { color: rgb(43, 0, 255); }
+  50% { color: rgb(255, 0, 0); }
+}
 
 @media (max-width: 768px) {
   .text {
-    padding: 40px !important; 
-    font-size: x-large !important; 
+    padding: 20px;
+    overflow-x: hidden;
   }
 
-  #landingP {
-    font-size: 4.5rem !important; 
-  }
-
-  #B {
-    margin-left: 0 !important; 
-    height: 120px; 
-    width: 120px;
+  .landingP {
+    font-size: 2rem;
   }
 }
 
-@media (max-width: 480px) {
+@keyframes float {
+  0%, 100% { transform: rotateY(0deg) translateZ(0); }
+  50% { transform: rotateY(360deg) translateZ(50px); }
+}
+
+@media (max-width: 768px) {
   .text {
-    padding: 20px !important;
-    font-size: large !important; 
+    padding: 20px;
+    overflow-x: hidden;
   }
 
-  #landingP {
-    font-size: 2.5rem !important; 
-  }
-
-  #B {
-    height: 100px; 
-    width: 100px;
+  .landingP {
+    font-size: 2rem;
   }
 }
+
+
 </style>

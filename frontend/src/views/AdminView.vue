@@ -1,5 +1,5 @@
 <template>
-  <NavbarHome />
+<NavbaAbout />
   <div class="container mt-5">
     <div class="row">
       <h2 class="display-4 text-center mb-4">Users</h2>
@@ -33,7 +33,8 @@
             <td>{{ user.emailAdd }}</td>
             <td>{{ user.userRole }}</td>
             <td class="d-flex justify-content-between">
-              <button class="btn btn-success btn-sm">Edit</button>
+              <button class="btn btn-success btn-sm" @click="editUser(user)">Edit</button>
+
               <button class="btn btn-danger btn-sm">Delete</button>
             </td>
           </tr>
@@ -49,7 +50,7 @@
       </div>
     </div>
     <div class="row">
-      <table class="table table-bordered table-hover table-striped mt-4">
+      <table class="table table-bordered table-hover table-striped mt-4 f">
         <thead class="table-primary">
           <tr>
             <th>Product ID</th>
@@ -66,8 +67,8 @@
             <td>{{ product.prodQuantity }}</td>
             <td>R {{ product.prodAmount }}</td>
             <td class="d-flex justify-content-between">
-              <button class="btn btn-success btn-sm">Edit</button>
-              <button class="btn btn-danger btn-sm">Delete</button>
+              <button class="btn btn-success btn-sm">Update</button>
+              <button class="btn btn-danger btn-sm" @click="delette(product.prodID)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -77,11 +78,14 @@
 </template>
 
 <script>
-import NavbarHome from '../components/NavbarHome'
+import NavbaAbout from '../components/NavbaAbout.vue'
 export default {
+  
   components: {
-    NavbarHome
+    NavbaAbout
   },
+
+
   computed: {
     users() {
       return this.$store.state.users
@@ -90,6 +94,14 @@ export default {
       return this.$store.state.products
     }
   },
+
+  methods : {
+    delette(id){
+      console.log(id);
+      return this.$store.dispatch("delete", id)
+    }
+  },
+
   mounted() {
     this.$store.dispatch('fetchUsers')
     this.$store.dispatch('fetchProducts')
@@ -99,7 +111,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background-color: #f8f9fa; 
+  // background-color: #f8f9fa; 
   padding: 20px;
   border-radius: 5px; 
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); 
@@ -115,16 +127,24 @@ export default {
   font-weight: 500; 
   letter-spacing: 0.5px; 
   transition: background-color 0.3s, box-shadow 0.3s;
+  margin-left: -2%;
 }
 
 .btn-techy:hover {
   background-color: #003d82; 
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); 
+  
 }
 
 .table {
   border-collapse: separate;
   border-spacing: 0 15px; 
+  margin-left: 23%;
+  background-color: #181819ce;
+  
+}
+.f{
+  margin-left: 17%;
 }
 
 .table th {
@@ -135,10 +155,10 @@ export default {
 }
 
 .table td {
-  background-color: #ffffff;
+  // background-color: #ffffff;
   padding: 15px;
   border: 1px solid #dee2e6; 
-  color: #333;
+  color: #dee2e6;
 }
 
 .table-primary thead th {
@@ -151,10 +171,12 @@ export default {
 
 .display-4 {
   font-size: 2.5rem; 
-  color: #333; 
+  color: #ffffff; 
   font-weight: 400;
   margin-bottom: 1rem;
   text-align: center;
+  margin-left: -2%;
+  opacity: 50%;
 }
 
 </style>

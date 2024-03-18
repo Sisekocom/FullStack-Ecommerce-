@@ -1,6 +1,6 @@
 <template>
-  <footer class="footer bg-primary text-white text-center py-3">
-    <div class="container">
+  <footer class=" footer bg-primary text-white text-center py-3">
+    <div class="container-fluid">
       <div class="footer-content">
         <div class="footer-column">
           <h6>
@@ -37,11 +37,25 @@
         </div>
       </div>
       <div class="row">
+        
+        <div class="col-md-6">
+          <ul class="social-links">
+            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="#" target="_blank"><i class="fab fa-youtube"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
         <div class="col">
           <p>&copy; 2024 DataCore Innovations. All rights reserved.</p>
         </div>
       </div>
     </div>
+     
+    
   </footer>
 </template>
 
@@ -50,6 +64,27 @@
 </script>
 
 <style scoped>
+
+
+.social-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-links li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.social-links li a {
+  color: #fff;
+  font-size: 20px;
+}
+
+.social-links li a:hover {
+  color: #ffd700;
+}
 .footer {
   background: linear-gradient(145deg, #0a0a0a, #323232);
   color: rgba(255, 255, 255, 0.9) !important;

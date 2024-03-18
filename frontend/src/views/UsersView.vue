@@ -1,6 +1,6 @@
 <template>
     <NavbaAbout />
-        <div>
+        <div class="container">
     
         </div>
     </template>

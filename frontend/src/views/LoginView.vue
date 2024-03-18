@@ -1,35 +1,37 @@
-<template>
-  <NavBar />
-  <div>
-    <div class="container mt-2">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card login-card">
-            <div class="card-header text-center">Login to Your Account</div>
-            <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <label for="username">Email Address</label>
-                  <input type="text" id="username" v-model="payload.emailAdd" class="form-control form-control-lg"
-                    placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" id="password" v-model="payload.userPass" class="form-control form-control-lg"
-                    placeholder="Enter your password" required>
-                </div>
-                <button @click.prevent="log()" type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
-              </form>
-            </div>
+
+<template >
+<NavBar />
+<div class="container">
+  <div class=" mt-2">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card login-card">
+          <div class="card-header text-center">Login to Your Account</div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="username">Email Address</label>
+                <input type="text" id="username" v-model="payload.emailAdd" class="form-control form-control-lg"
+                  placeholder="Enter your email" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" v-model="payload.userPass" class="form-control form-control-lg"
+                  placeholder="Enter your password" required>
+              </div>
+              <button @click.prevent="log()" type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </template>
-
 <script>
+
 import NavBar from '../components/NavBar.vue';
+
 
 export default {
   name: 'LoginView',
@@ -51,10 +53,16 @@ export default {
       } catch (error) {
         console.error(error);
       }
-    },
+       {
+      this.$store.commit('login');
+      const redirect = this.$route.query.redirect || '/';
+      this.$router.push(redirect);
+    }
+    }
   },
 };
 </script>
+
 <style scoped>
 .login-card {
   border: none;
@@ -70,7 +78,6 @@ export default {
   color: white;
   border-bottom: none;
   border-radius: 10px 10px 0 0;
-
 }
 
 .form-control,
@@ -112,11 +119,81 @@ export default {
 }
 
 #password {
-  margin-left: 4%;
+  margin-left: 2%;
 }
 
 label {
   margin-left: -3%;
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .login-card {
+    margin: 10px auto; 
+    padding: 15px; 
+  }
+
+  .login-card .card-header {
+    font-size: 1.5rem;
+  }
+
+  .card-body {
+    padding: 1rem; 
+  }
+
+  .form-control, .btn-primary {
+    font-size: 0.9rem;
+  }
+
+  .btn-primary {
+    padding: 10px 0;
+  }
+
+  .form-group label {
+    font-size: 0.9rem; 
+  }
+  
+  
+  .form-control, .btn-primary {
+    width: 100%; 
+    box-sizing: border-box; 
+  }
+
+
+  .row {
+    margin-right: 0; 
+    margin-left: 0; 
+  }
+  
+  .col-md-6 {
+    flex: 0 0 100%; 
+    max-width: 100%; 
+  }
+}
+.settings {
+  color: aliceblue;
+}
+
+.language-selection, .timezone-selection {
+  margin: auto;
+  width: fit-content;
+  padding: 1rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: .5rem;
+}
+
+.form-select {
+  font-size: 1rem;
+  padding: .5rem;
+  color: #000;
+  background-color: #fff;
+  border-radius: .25rem;
 }
 
 </style>

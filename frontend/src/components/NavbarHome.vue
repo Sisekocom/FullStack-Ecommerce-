@@ -1,94 +1,80 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-       
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <div class="navbar-nav ml-auto">
-            <router-link class="nav-item nav-link KK" to="/contact"> CONTACT</router-link>
-            <router-link class="nav-item nav-link KK" to="/checkout">CHECKOUT </router-link>
-            <router-link class="nav-item nav-link KK" to="/admin">ADMIN </router-link>
-            <router-link class="nav-item nav-link KK" to="/products">PRODUCTS</router-link>
-            <router-link class="nav-item nav-link KK" to="/about">ABOUT</router-link>
-            <router-link class="nav-item nav-link KK" to="/"> HOME </router-link>
-            <router-link class="nav-item nav-link yK v-show=products" to="/Login"> LOGIN</router-link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <router-link class="navbar-brand" to="/">
+        <img height="80px" width="80px" src="https://i.postimg.cc/d0bpKTM7/R-removebg-preview-1.png" alt="Logo">
+      </router-link>
+      <div class="collapse navbar-collapse " id="navbarNav">
+        <div class="navbar-nav ">
+          <router-link class="nav-item nav-link" to="/contact">CONTACT</router-link>
+          <router-link class="nav-item nav-link" to="/checkout">CHECKOUT</router-link>
+          <router-link class="nav-item nav-link" to="/admin">ADMIN</router-link>
+          <router-link class="nav-item nav-link" to="/products">PRODUCTS</router-link>
+          <router-link class="nav-item nav-link" to="/about">ABOUT</router-link>
+          <router-link class="nav-item nav-link" to="/">HOME</router-link>
         
-            <div>    <router-link class="navbar-brand" to="/">
-        <img href="/" height="80px" width="80px" src="https://i.postimg.cc/d0bpKTM7/R-removebg-preview-1.png" alt="">
-      </router-link></div>
-          </div>
         </div>
       </div>
-    </nav>
-    <!-- <router-link class="dropdown-item" to="/Register">REGISTER</router-link> -->
-  </template>
-  
-  <script>
-  export default {
-    name: 'NavBar',
-  };
-  </script>
-  
-  <style scoped>
+    </div>
+  </nav>
+  <!-- <h6 class="animate__animated animate__backInLeft " >RESTRICTED TO ADMINS ONLY </h6>
+  <h5 class="animate__animated animate__backInRight">ADMINS ONLY</h5> -->
+</template>
+
+<script>
+export default {
+name: 'NavBar',
+};
+</script>
+
+<style scoped>
+h5{
+  color: red;
+}
+h6{
+  color: red;
+}
 .navbar {
-  background: linear-gradient(145deg, #0a0a0a, #323232);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+background: linear-gradient(145deg, #212529, #414345);
+box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+font-family: 'Orbitron', sans-serif;
+
 }
 
-a:hover, .navbar-brand:hover {
-  background: linear-gradient(145deg, #0a0a0a, #323232);
-  border-radius: 5px;
-  color: white !important;
-  transform: translateY(-2px);
-  transition: all 0.40s ease;
-  transform: scale(1.5);
+.navbar-brand img {
+transition: transform 0.5s ease;
 }
 
-img {
-  margin-top: -3% !important;
-  transform: translateY(-8px);
-  /* transition: all 0.40s ease; */
- /* transform: scale(1.3); */
-   margin-right: 70%;
+.navbar-brand img:hover {
+transform: scale(1.1);
 }
 
-img:hover {
-  transform: scale(1.1);
+.nav-item.nav-link {
+font-size: 1.05rem;
+font-weight: bold;
+margin-right: 20px;
+transition: color 0.4s ease-in-out, transform 0.3s ease;
+color: rgba(255, 255, 255, 0.75) !important; /* Subtle color */
+text-transform: uppercase;
+letter-spacing: 1px;
 }
 
-.KK {
-  font-size: large !important;
-  font-weight: bold !important;
-  margin-left: 4% !important;
-  color: rgba(255, 255, 255, 0.818) !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+.nav-item.nav-link:hover, .nav-item.nav-link:focus {
+color: #ffffff !important; /* Brighter on hover */
+background-color: transparent;
+transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
-  img {
-    margin-top: 0;
-  }
-
-  .navbar-nav {
-    text-align: center;
-  }
-
-  .KK {
-    margin-left: 0 !important;
-  }
+.navbar-nav {
+  margin-top: 10px;
 }
 
-.yK {
-  margin-right: 30%;
+.nav-item.nav-link {
+  margin-right: 0;
+  margin-bottom: 8px;
 }
-
-.dropdown-item {
-  float: left;
-  font-size: x-large;
-  font-weight: 800;
-  color: rgba(255, 255, 0, 0.658);
-  margin: 1%;
-  text-decoration: none;
-  margin: 3%;
 }
-
 </style>

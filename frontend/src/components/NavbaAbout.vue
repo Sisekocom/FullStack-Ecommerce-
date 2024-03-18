@@ -1,26 +1,47 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-       
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <div class="navbar-nav ml-auto">
-            <router-link class="nav-item nav-link KK" to="/contact"> CONTACT</router-link>
-            <router-link class="nav-item nav-link KK" to="/checkout">CHECKOUT </router-link>
-            <router-link class="nav-item nav-link KK" to="/admin">ADMIN </router-link>
-            <router-link class="nav-item nav-link KK" to="/products">PRODUCTS</router-link>
-            <router-link class="nav-item nav-link KK" to="/about">ABOUT</router-link>
-            <router-link class="nav-item nav-link KK" to="/"> HOME </router-link>
-    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <div class="navbar-nav ml-auto">
+          <router-link class="nav-link KK ll " to="/login">
+              <i class="fas fa-sign-in-alt icon-green"></i> LOGOUT
+            </router-link>
+          <router-link class="nav-item nav-link KK" to="/contact">
+            <i class="fas fa-envelope icon-green"></i> CONTACT
+          </router-link>
+          <router-link class="nav-item nav-link KK" to="/checkout">
+            <i class="fas fa-shopping-cart icon-green"></i> CHECKOUT
+          </router-link>
+          <router-link class="nav-item nav-link KK animate__animated animate__lightSpeedOutLeft" to="/admin">
+            <i class="fas fa-user icon-green"></i> ADMIN
+          </router-link>
+          <router-link class="nav-item nav-link KK" to="/products">
+            <i class="fas fa-box icon-green"></i> PRODUCTS
+          </router-link>
+          <router-link class="nav-item nav-link KK" to="/about">
+            <i class="fas fa-info-circle icon-green"></i> ABOUT
+          </router-link>
+          <router-link class="nav-item nav-link KK" to="/">
+            <i class="fas fa-home icon-green"></i> HOME
+          </router-link>
         
-            <div>    <router-link class="navbar-brand" to="/">
-        <img href="/" height="80px" width="80px" src="https://i.postimg.cc/d0bpKTM7/R-removebg-preview-1.png" alt="">
-      </router-link></div>
+          
+          <div>
+            <router-link class="navbar-brand" to="/">
+              <img class="animate__animated animate__flash" href="/" height="90px" width="90px"
+                src="https://www.zilliondesigns.com/blog/wp-content/uploads/loading-the-truck.gif" alt="">
+                
+            </router-link>
           </div>
         </div>
       </div>
-    </nav>
-   
-  </template>
+    </div>
+  </nav>
+  
+</template>
+
+
   
   <script>
   export default {
@@ -32,6 +53,8 @@
 .navbar {
   background: linear-gradient(145deg, #0a0a0a, #323232);
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+  padding: 2%;
+  
 }
 
 a:hover, .navbar-brand:hover {
@@ -44,11 +67,12 @@ a:hover, .navbar-brand:hover {
 }
 
 img {
-  margin-top: -3.5% !important;
+  margin-top: -1.5% !important;
   /* transform: translateY(-8px); */
   /* transition: all 0.40s ease; */
  /* transform: scale(1.3); */
    margin-right:100%;
+   border-radius: 50%;
    
 }
 
@@ -75,6 +99,9 @@ img:hover {
 
 
 }
+.icon-green {
+  color: green;
+}
 
 
 
@@ -87,6 +114,8 @@ img:hover {
   text-decoration: none;
   margin: 3%;
 }
-
+.ll{
+  text-decoration: none;
+}
 
 </style>

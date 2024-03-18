@@ -1,74 +1,154 @@
 <template>
-     <NavbaAbout />
-    <link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-/>
-<div class="justify-content-center" v-if="product">
-<img class="card-img-top animate__animated animate__bounceInUp" :src="product.prodUrl" alt="Product Image">
-<h1 class="text-white">{{ product.prodName }}</h1>
-<div class="card-text text-light bg-secondary subtle p-5 w-100 animate__animated animate__backInLeft">
-  <p >Amount: R{{ product.prodAmount }}</p>
-  <button class="btn btn-danger mx-5 w-50 text-black bg-white-subtle p-1 " @click="goBack">Back</button>
-</div>
-</div>
+  <NavbaAbout />
+  <div class="container" v-if="product">
+    <div class="product-info">
+      <div class="product-image">
+        <img :src="product.prodUrl" alt="Product Image">
+      </div>
+      <div class="product-details">
+        <h1 class="product-title">{{ product.prodName }}</h1>
+        <p class="product-amount">Price: R{{ product.prodAmount }}</p>
+        <p class="product-description">{{ product.description }}</p>
+        <div class="button-group">
+          <button class="btn btn-danger" @click="goBack">Back</button>
+          <button class="btn btn-primary" @click="addToCart">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-
 import NavbaAbout from '../components/NavbaAbout.vue';
-export default {
-name: 'ProductView',
-computed: {
-product() {
-  return this.$store.state.product;
-}
 
-},
-components: {
-     
-      NavbaAbout
+export default {
+  name: 'ProductView',
+  components: { NavbaAbout },
+  computed: {
+    product() {
+      return this.$store.state.product;
+    }
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1); 
     },
-methods: {
-goBack() {
-  this.$router.go(-1); 
-}
-},
-mounted() {
-this.$store.dispatch('fetchProduct', this.$route.params);
-}
+    addToCart() {
+      console.log('Product added to cart');
+    }
+  },
+  mounted() {
+    this.$store.dispatch('fetchProduct', this.$route.params);
+  }
 }
 </script>
 
 <style scoped>
-img {
-max-width: 20%; 
-height: auto;
-border-radius: 50%;
-display: block; 
-margin: 1rem auto;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
-@media (max-width: 768px) {
-.card-text {
-padding: 2rem 1rem; 
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
 }
 
-h1 {
-font-size: 1.5rem; 
+
+.product-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-details {
+  max-width: 100%;
+  padding: 1rem;
+}
+
+.product-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.product-amount {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  background-color: #6a846bea;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.product-description {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .btn {
-padding: 0.1rem;
-width: auto;
-font-size: 0.1rem; 
-}
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.justify-content-center {
-display: flex;
-flex-direction: column;
-align-items: center;
-text-align: center;
+.btn-danger {
+  background-color: #DC3545;
+}
+
+.btn-primary {
+  background-color: #007BFF;
+}
+
+@media (min-width: 768px) {
+  .product-info {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .product-image img {
+    max-width: 50%;
+  }
+
+  .product-details {
+    max-width: 50%;
+    text-align: left;
+    padding: 0 1rem;
+  }
+
+  .button-group {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .product-title {
+    font-size: 2.5rem;
+  }
+
+  .product-amount {
+    font-size: 1.5rem;
+  }
+
+  .product-description {
+    font-size: 1.1rem;
+  }
+
+  .btn {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+  }
 }
 </style>

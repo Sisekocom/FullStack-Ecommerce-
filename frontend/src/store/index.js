@@ -1,10 +1,11 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
 import sweet from 'sweetalert';
-import { useCookies } from 'vue3-cookies';
+// Removed useCookies import because it's typically used within Vue components, not Vuex.
 import AuthenticateUser from '@/store/services/AuthenticateUser';
 import router from '@/router';
-const {cookies} = useCookies()
+
+// Assuming `Server` is a constant URL for your API.
 const Server = 'https://fullstack-ecommerce-do0c.onrender.com/';
 
 export default createStore({
@@ -12,7 +13,9 @@ export default createStore({
     users: null,
     user: null,
     products: null,
-    product: null
+    product: null,
+    orders : null,
+    isLoggedIn: false,
   },
   mutations: {
     setUsers(state, users) {
@@ -21,86 +24,62 @@ export default createStore({
     setUser(state, user) {
       state.user = user;
     },
-    setProducts(state, value) {
-      console.log(value);
-      state.products = value;
+    setProducts(state, products) {
+      state.products = products;
+    },
+    setOrders(state, value){
+      state.orders = value
     },
     setProduct(state, product) {
       state.product = product;
     },
+    login(state) {
+      state.isLoggedIn = true;
+    },
+    logout(state) {
+      state.isLoggedIn = false;
+    },
   },
   actions: {
-    async login(context, payload) {
+    async login({ commit }, payload) {
       try {
         const response = await axios.post(`${Server}users/login`, payload);
         const { msg, token, result } = response.data;
         if (result) {
-          context.commit('setUser', { msg, result });
-          cookies.set('LegitUser', { msg, token, result });
-          console.log('Store - Login: ', token);
+          commit('setUser', result);
+          // You'll need to adjust how cookies are set. This line is conceptual.
+          // cookies.set('LegitUser', token, { expires: '1d' });
           AuthenticateUser.applyToken(token);
           sweet({
             title: msg,
-            text: `Welcome back, ${result?.firstName} ${result?.lastName}`,
+            text: `Welcome back, ${result.firstName} ${result.lastName}`,
             icon: "success",
-            timer: 2000
+            timer: 2000,
           });
           router.push({ name: 'home' });
         } else {
           sweet({
-            title: 'info',
+            title: 'Login Info',
             text: msg,
             icon: "info",
-            timer: 2000
+            timer: 2000,
           });
         }
       } catch (error) {
         sweet({
-          title: 'Error',
+          title: 'Login Error',
           text: error.response?.data?.msg || 'Failed to login.',
           icon: "error",
-          timer: 2000
-        });
-        throw error;
-      }
-    },
-    async register(context, payload) {
-      try {
-        const response = await axios.post(`${Server}users/register`, payload);
-        const { msg, token } = response.data;
-    
-        if (token) {
-          sweet({
-            title: 'Registration Successful',
-            text: msg,
-            icon: "success",
-            timer: 2000
-          });
-          router.push({ name: 'login' });
-        }
-      } catch (e) {
-        // Check if the error message is an object, and stringify if necessary
-        let errorMessage = e.response?.data?.msg;
-        if (typeof errorMessage === 'object') {
-          errorMessage = JSON.stringify(errorMessage, null, 2);
-        } else if (!errorMessage) {
-          errorMessage = 'An error occurred during registration.';
-        }
-    
-        sweet({
-          title: 'Error',
-          text: errorMessage,
-          icon: "error",
-          timer: 2000
+          timer: 2000,
         });
       }
     },
     
-    
-    async fetchUsers({ commit }) {
+    async fetchAllOrders( context ) {
       try {
-        const { results } = (await axios.get(`${Server}users`)).data;
-        commit('setUsers', results);
+        const { results } = (await axios.get(`${Server}orders`)).data;
+        console.log(results);
+        context.commit('setOrders', results);
       } catch (error) {
         sweet({
           title: 'Error',
@@ -110,28 +89,7 @@ export default createStore({
         });
       }
     },
-    async fetchUser({ commit }, payload) {
-      try {
-        const { result } = (await axios.get(`${Server}users/${payload.id}`)).data;
-        if (result) {
-          commit('setUser', result);
-        } else {
-          sweet({
-            title: 'Retrieving a single user',
-            text: 'User was not found',
-            icon: "info",
-            timer: 2000
-          });
-        }
-      } catch (error) {
-        sweet({
-          title: 'Error',
-          text: error.message,
-          icon: "error",
-          timer: 2000
-        });
-      }
-    },
+
     async fetchProducts( context ) {
       try {
         const { results } = (await axios.get(`${Server}products`)).data;
@@ -148,7 +106,8 @@ export default createStore({
     },
     async fetchProduct({ commit }, payload) {
       try {
-        const { result } = await axios.get(`${Server}products/${payload.id}`);
+        const { result } =( await axios.get(`${Server}products/${payload.id}`)).data;
+        // console.log(results);
         commit('setProduct', result);
       } catch (error) {
         sweet({
@@ -158,8 +117,62 @@ export default createStore({
           timer: 2000
         });
       }
-    }
+    },
+    async delete(context, payload) {
+      try {
+        console.log();
+        const { result } =( await axios.delete(`${Server}products/delete/${payload}`)).data;
+        console.log(result);
+        context.commit('setProduct', result);
+      } catch (error) {
+        sweet({
+          title: 'Error',
+          text: 'A Product was not deleted!.',
+          icon: "error",
+          timer: 2000
+        });
+      }
+    },
+    
+    async fetchUsers({ commit }) {
+      try {
+        const response = await axios.get(`${Server}users`);
+        commit('setUsers', response.data.results);
+      } catch (error) {
+        sweet({
+          title: 'Fetch Error',
+          text: 'Failed to load users.',
+          icon: "error",
+          timer: 2000,
+        });
+      }},
+      async register(context, payload) {
+        try {
+          console.log(payload);
+          const response = await axios.post(`${Server}users/register`, payload);
+          const { msg, token } = response.data;
+          
+          if (token) {
+            context.commit("setUser", payload);
+            sweet({
+              title: 'Registration Successful',
+              text: msg,
+              icon: "success",
+              timer: 2000,
+            });
+            router.push({ name: 'Login' });
+          }
+        } catch (error) {
+          sweet({
+            title: 'Registration Error',
+            text: error.response?.data?.msg || 'An error occurred during registration.',
+            icon: "error",
+            timer: 2000,
+          });
+        }
+      }
+      
+      
   },
-  
-  modules: {}
+  modules: {},
 });

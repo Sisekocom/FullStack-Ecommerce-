@@ -13,7 +13,7 @@
 //         cookieParser.set('setUser', { token, msg, result });
 //         AuthenticateUser.js.applyToken(token);
 //         sweet({
-//           title: msg,
+          // title: msg,
 //           text: `Welcome back, ${result?.firstName} ${result?.lastName}`,
 //           icon: "success",
 //           timer: 2000
@@ -44,8 +44,8 @@
 // export default new Vuex.Store({
 //   state: {
     // Define your state properties if needed
-//   },
-//   mutations: {
+  // },
+  // /mutations: {
     // Handle state mutations if needed
 //   },
 //   actions: {
