@@ -8,7 +8,7 @@ const orderRouter = express.Router()
 
 orderRouter.get('/', (req, res)=>{
     try{
-        products.fetchOrders(req, res)
+        orders.fetchAllOrders(req, res)
     }catch(e) {
         res.json({
             status: res.statusCode,
