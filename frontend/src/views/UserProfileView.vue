@@ -26,6 +26,7 @@
 
 <script>
 import { useCookies } from 'vue3-cookies';
+const { cookies } = useCookies();
 import NavbaAbout from '../components/NavbaAbout.vue'
 
 export default {
@@ -51,8 +52,8 @@ export default {
 
   computed : {
     userProfile(){
-      return this.$store.state.user
-    },
+     return cookies.get("LoggedUser")?.result
+        },
 
   },
 
