@@ -107,9 +107,10 @@ class Users {
     `;
     db.query(qry, (err) => {
       if (err) {
+        console.error('Error deleting user:', err);
         res.status(500).json({
           status: res.statusCode,
-          msg: "Failed to delete a user.",
+          msg: "An error occurred while deleting a user.",
         });
       } else {
         res.json({
@@ -119,6 +120,7 @@ class Users {
       }
     });
   }
+  
 
   login(req, res) {
     const { emailAdd, userPass } = req.body;

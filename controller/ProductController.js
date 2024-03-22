@@ -16,6 +16,7 @@ productRouter.get('/', (req, res)=>{
         })
     }
 })
+
 productRouter.get('/:id', (req, res)=>{
     try{
         products.fetchProduct(req, res)
@@ -59,3 +60,4 @@ productRouter.delete('/delete/:id', (req, res)=>{
 export{
     productRouter
 }
+
