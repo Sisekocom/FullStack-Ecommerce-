@@ -1,12 +1,11 @@
-import { createStore } from 'vuex';
-import axios from 'axios';
-import sweet from 'sweetalert';
-// Removed useCookies import because it's typically used within Vue components, not Vuex.
-import AuthenticateUser from '@/store/services/AuthenticateUser';
-import router from '@/router';
-
-// Assuming `Server` is a constant URL for your API.
-const Server = 'https://fullstack-ecommerce-do0c.onrender.com/';
+import { createStore } from "vuex";
+import axios from "axios";
+import Swal from "sweetalert2";
+import AuthenticateUser from "@/store/services/AuthenticateUser";
+import router from "@/router";
+import { useCookies } from "vue3-cookies";
+const { cookies } = useCookies();
+const Server = "https://fullstack-ecommerce-do0c.onrender.com/";
 
 export default createStore({
   state: {
@@ -14,7 +13,7 @@ export default createStore({
     user: null,
     products: null,
     product: null,
-    orders : null,
+    orders: null,
     isLoggedIn: false,
   },
   mutations: {
@@ -27,8 +26,8 @@ export default createStore({
     setProducts(state, products) {
       state.products = products;
     },
-    setOrders(state, value){
-      state.orders = value
+    setOrders(state, value) {
+      state.orders = value;
     },
     setProduct(state, product) {
       state.product = product;
@@ -41,138 +40,208 @@ export default createStore({
     },
   },
   actions: {
-    async login({ commit }, payload) {
+    async login(context, payload) {
       try {
         const response = await axios.post(`${Server}users/login`, payload);
         const { msg, token, result } = response.data;
         if (result) {
-          commit('setUser', result);
-          // You'll need to adjust how cookies are set. This line is conceptual.
-          // cookies.set('LegitUser', token, { expires: '1d' });
+          context.commit("setUser", { msg, result });
+          cookies.set("LoggedUser", { token, msg, result });
+
           AuthenticateUser.applyToken(token);
-          sweet({
+          Swal.fire({
             title: msg,
             text: `Welcome back, ${result.firstName} ${result.lastName}`,
             icon: "success",
             timer: 2000,
           });
-          router.push({ name: 'home' });
+          router.push({ name: "home" });
         } else {
-          sweet({
-            title: 'Login Info',
+          Swal.fire({
+            title: "Login Info",
             text: msg,
             icon: "info",
             timer: 2000,
           });
         }
       } catch (error) {
-        sweet({
-          title: 'Login Error',
-          text: error.response?.data?.msg || 'Failed to login.',
+        Swal.fire({
+          title: "Login Error",
+          text: error.response?.data?.msg || "Failed to login.",
           icon: "error",
           timer: 2000,
         });
       }
     },
-    
-    async fetchAllOrders( context ) {
+
+    async fetchAllOrders(context) {
       try {
         const { results } = (await axios.get(`${Server}orders`)).data;
         console.log(results);
-        context.commit('setOrders', results);
+        context.commit("setOrders", results);
       } catch (error) {
-        sweet({
-          title: 'Error',
+        Swal.fire({
+          title: "Error",
           text: error.message,
           icon: "error",
-          timer: 2000
+          timer: 2000,
         });
       }
     },
 
-    async fetchProducts( context ) {
+    async fetchProducts(context) {
       try {
         const { results } = (await axios.get(`${Server}products`)).data;
         console.log(results);
-        context.commit('setProducts', results);
+        context.commit("setProducts", results);
       } catch (error) {
-        sweet({
-          title: 'Error',
+        Swal.fire({
+          title: "Error",
           text: error.message,
           icon: "error",
-          timer: 2000
+          timer: 2000,
         });
       }
     },
     async fetchProduct({ commit }, payload) {
       try {
-        const { result } =( await axios.get(`${Server}products/${payload.id}`)).data;
+        const { result } = (await axios.get(`${Server}products/${payload.id}`))
+          .data;
         // console.log(results);
-        commit('setProduct', result);
+        commit("setProduct", result);
       } catch (error) {
-        sweet({
-          title: 'Error',
-          text: 'A product was not found.',
+        Swal.fire({
+          title: "Error",
+          text: "A product was not found.",
           icon: "error",
-          timer: 2000
+          timer: 2000,
         });
       }
     },
     async delete(context, payload) {
       try {
         console.log();
-        const { result } =( await axios.delete(`${Server}products/delete/${payload}`)).data;
+        const { result } = (
+          await axios.delete(`${Server}products/delete/${payload}`)
+        ).data;
         console.log(result);
-        context.commit('setProduct', result);
+        context.commit("setProduct", result);
       } catch (error) {
-        sweet({
-          title: 'Error',
-          text: 'A Product was not deleted!.',
-          icon: "error",
-          timer: 2000
-        });
-      }
-    },
-    
-    async fetchUsers({ commit }) {
-      try {
-        const response = await axios.get(`${Server}users`);
-        commit('setUsers', response.data.results);
-      } catch (error) {
-        sweet({
-          title: 'Fetch Error',
-          text: 'Failed to load users.',
+        Swal.fire({
+          title: "msg",
+          text: "A Product was deleted !.",
           icon: "error",
           timer: 2000,
         });
-      }},
-      async register(context, payload) {
-        try {
-          console.log(payload);
-          const response = await axios.post(`${Server}users/register`, payload);
-          const { msg, token } = response.data;
-          
-          if (token) {
-            context.commit("setUser", payload);
-            sweet({
-              title: 'Registration Successful',
-              text: msg,
-              icon: "success",
-              timer: 2000,
-            });
-            router.push({ name: 'Login' });
-          }
-        } catch (error) {
-          sweet({
-            title: 'Registration Error',
-            text: error.response?.data?.msg || 'An error occurred during registration.',
-            icon: "error",
+      }
+    },
+    async fetchUser({ commit }, payload) {
+      try {
+        console.log("payload ->", payload);
+        const response = await axios.get(`${Server}users/${payload}`);
+        console.log(response.data.result);
+        commit("setUser", response.data.result);
+      } catch (error) {
+        console.error("Failed to fetch user:", error);
+        Swal.fire({
+          title: "Fetch Error",
+          text: "Failed to load users.",
+          icon: "error",
+          timer: 2000,
+        });
+      }
+    },
+    async fetchUsers({ commit }) {
+      try {
+        const response = await axios.get(`${Server}users`);
+        commit("setUsers", response.data.results);
+      } catch (error) {
+        Swal.fire({
+          title: "Fetch Error",
+          text: "Failed to load users.",
+          icon: "error",
+          timer: 2000,
+        });
+      }
+    },
+    async updateUser(context, payload) {
+      try {
+        let { msg } = await (
+          await axios.patch(`${Server}/users/${payload.userID}`, payload)
+        ).data;
+        context.dispatch("fetchUsers");
+        Swal.fire({
+          title: "update User",
+          text: msg,
+          icon: "success",
+          timer: 2000,
+        });
+      } catch (e) {
+        Swal.fire({
+          title: "Error",
+          text: e.message,
+          icon: "error",
+          timer: 2000,
+        });
+      }
+    },
+    async register(context, payload) {
+      try {
+        // const response = await axios.post(`${Server}users/register`, payload);
+        // const { msg, token } = await response.data;
+        const { msg, token } = await (
+          await axios.post(`${Server}users/register`, payload)
+        ).data;
+
+        if (token) {
+          // context.commit("setUser", payload);
+          Swal.fire({
+            title: "Registration Successful",
+            text: msg,
+            icon: "success",
             timer: 2000,
           });
+          router.push({ name: "login" });
         }
+      } catch (error) {
+        Swal.fire({
+          title: "Registration Error",
+          text: error.message || "An error occurred during registration.",
+          icon: "error",
+          timer: 2000,
+        });
       }
-      
-      
+    },
+    async addCart(context, payload) {
+      try {
+        const currentUser = cookies.get("LoggedUser")?.result;
+        const updatedData = Object.assign(
+          {},
+          { userID: currentUser.userID, prodID: payload.prodID }
+        );
+        console.log(updatedData);
+        const { msg } = (
+          await axios.post(`${Server}orders/addOrder`, updatedData)
+        ).data;
+        // if (response.status !== 200) {
+        //   throw new Error(`Failed to update Product. Status: ${response.status}`);
+        // }
+        Swal.fire({
+          title: "Add to cart",
+          text: msg,
+          icon: "success",
+          timer: 2000,
+        });
+        context.commit("setOrders", updatedData);
+      } catch (error) {
+        Swal.fire({
+          title: "Add to cart",
+          text: error.message,
+          icon: "error",
+          timer: 2000,
+        });
+      }
+    },
   },
   modules: {},
 });

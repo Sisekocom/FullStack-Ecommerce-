@@ -38,14 +38,14 @@ export default {
 .landingP {
   font-family: "Orbitron", sans-serif;  
   font-weight: bold;
-  font-size: 4.2rem;
+  font-size: 4.8rem;
   margin-bottom: 3%;
   border-radius: 10%;
   box-shadow: 0 0 50px rgba(255, 2, 2, 0.301);
   margin: 1%;
   display: inline-block;
   transform-style: preserve-3d;
-  animation: float 200s infinite, colorChange 50s infinite alternate; /* Add a floating and color-changing animation */
+  animation: float 300s infinite, colorChange 50s infinite alternate; 
 }
 
 @keyframes float {

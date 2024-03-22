@@ -1,12 +1,13 @@
-<template>
-<NavbaAbout />
+User
+use a difference bootstrap table , make it responsive for all divices , <template>
+  <NavbaAbout />
   <div class="container mt-5">
     <div class="row">
       <h2 class="display-4 text-center mb-4">Users</h2>
     </div>
     <div class="row">
       <div class="col">
-        <button class="btn btn-primary btn-techy" data-bs-toggle="modal" data-bs-target="">Add User</button>
+       <router-link to="/registration"> <button  class="btn btn-primary btn-techy" data-bs-toggle="modal" data-bs-target="">Add User</button></router-link>
       </div>
     </div>
     <div class="row">
@@ -33,8 +34,7 @@
             <td>{{ user.emailAdd }}</td>
             <td>{{ user.userRole }}</td>
             <td class="d-flex justify-content-between">
-              <button class="btn btn-success btn-sm" @click="editUser(user)">Edit</button>
-
+              <button class="btn btn-success btn-sm" @click="editUser(user)">Update</button>
               <button class="btn btn-danger btn-sm">Delete</button>
             </td>
           </tr>
@@ -42,11 +42,11 @@
       </table>
     </div>
     <div class="row">
-      <h2 class="display-4 text-center mt-5 mb-4">Products </h2>
+      <h2 class="display-4 text-center mt-5 mb-4">Products</h2>
     </div>
     <div class="row">
       <div class="col">
-        <button class="btn btn-primary btn-techy">Add Product</button>
+        <button class="btn btn-primary btn-techy" @click="showAddProductModal = true">Add Product</button>
       </div>
     </div>
     <div class="row">
@@ -74,18 +74,54 @@
         </tbody>
       </table>
     </div>
+    <div class="modal" tabindex="-1" role="dialog" v-if="showAddProductModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Product</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="showAddProductModal = false">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form @submit.prevent="addProduct">
+              <div class="form-group">
+                <label for="prodName">Product Name</label>
+                <input type="text" class="form-control" id="prodName" v-model="newProduct.prodName" required>
+              </div>
+              <div class="form-group">
+                <label for="prodQuantity">Product Quantity</label>
+                <input type="number" class="form-control" id="prodQuantity" v-model="newProduct.prodQuantity" required>
+              </div>
+              <div class="form-group">
+                <label for="prodAmount">Product Amount</label>
+                <input type="number" class="form-control" id="prodAmount" v-model="newProduct.prodAmount" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
 import NavbaAbout from '../components/NavbaAbout.vue'
+
 export default {
-  
   components: {
     NavbaAbout
   },
-
-
+  data() {
+    return {
+      showAddProductModal: false,
+      newProduct: {
+        prodName: '',
+        prodQuantity: 0,
+        prodAmount: 0
+      }
+    };
+  },
   computed: {
     users() {
       return this.$store.state.users
@@ -94,89 +130,230 @@ export default {
       return this.$store.state.products
     }
   },
-
-  methods : {
+  methods: {
+    addProduct() {
+      this.$store.dispatch('addProduct', this.newProduct)
+        .then(() => {
+          this.newProduct = {
+            prodName: '',
+            prodQuantity: 0,
+            prodAmount: 0
+          };
+          this.showAddProductModal = false;
+        })
+        .catch(error => {
+          console.error('Error adding product:', error);
+        });
+    },
     delette(id){
       console.log(id);
       return this.$store.dispatch("delete", id)
+    },
+    editUser(userID){
+      this.$store.dispatch(" updateUser", userID)
     }
   },
-
   mounted() {
-    this.$store.dispatch('fetchUsers')
-    this.$store.dispatch('fetchProducts')
+    this.$store.dispatch('fetchUsers');
+    this.$store.dispatch('fetchProducts');
   }
 }
 </script>
 
-<style lang="scss" scoped>
+
+<style scoped>
+@media screen and (max-width: 600px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .table thead {
+    display: none; /* Hide the table headers on small screens */
+  }
+
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table tr {
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Add some shadow to each "card" */
+  }
+
+  .table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    text-align: left; /* Adjust text alignment */
+    border: none; /* Remove borders for a cleaner look */
+    padding: 10px 20px; /* Adjust padding for readability */
+    white-space: normal; /* Ensure text wraps */
+    word-wrap: break-word; /* Ensure long words do not overflow */
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 20px;
+    font-weight: bold;
+    text-transform: uppercase; /* Make labels stand out */
+  }
+
+  /* Adjust button sizes for easier interaction on touch devices */
+  .table .btn-sm {
+    padding: 5px 10px;
+    font-size: 0.875rem;
+  }
+}
+
+:root {
+  --primary-color: #007bff; /* Primary color for your theme */
+  --secondary-color: #6c757d; /* Secondary color */
+  --hover-color: #0056b3; /* Hover state color */
+  --border-color: #dee2e6; /* Border color */
+  --background-light: #f8f9fa; /* Light background */
+  --text-color: #212529; /* Primary text color */
+}
+
 .container {
-  // background-color: #f8f9fa; 
-  padding: 20px;
-  border-radius: 5px; 
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); 
-  margin-top: 20px; 
-}
-
-.btn-techy {
-  background-color: #0056b3; 
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-weight: 500; 
-  letter-spacing: 0.5px; 
-  transition: background-color 0.3s, box-shadow 0.3s;
-  margin-left: -2%;
-}
-
-.btn-techy:hover {
-  background-color: #003d82; 
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); 
-  
+  padding: 1rem;
 }
 
 .table {
-  border-collapse: separate;
-  border-spacing: 0 15px; 
-  margin-left: 23%;
-  background-color: #181819ce;
-  
-}
-.f{
-  margin-left: 17%;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-.table th {
-  background-color: #007bff; 
+.table thead {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.table thead th {
+  padding: 12px 10px;
+  text-align: left;
+  color: black;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: var(--background-light);
+}
+
+.table tbody tr:hover {
+  background-color: var(--hover-color);
   color: #ffffff;
-  padding: 15px;
-  border-radius: 5px 5px 0 0; 
 }
 
-.table td {
-  // background-color: #ffffff;
-  padding: 15px;
-  border: 1px solid #dee2e6; 
-  color: #dee2e6;
+.table td,
+.table th {
+  padding: 8px 10px;
+  border: 1px solid var(--border-color);
 }
 
-.table-primary thead th {
-  background-color: #0069d9; 
+.table .btn {
+  margin-right: 5px;
+  border-radius: 5px; /* Rounded buttons for a modern look */
+  transition: background-color 0.3s ease;
 }
 
-.table-primary tbody tr:hover {
-  background-color: #e9ecef; 
+.table .btn-success {
+  background-color: #28a745;
 }
 
-.display-4 {
-  font-size: 2.5rem; 
-  color: #ffffff; 
-  font-weight: 400;
-  margin-bottom: 1rem;
-  text-align: center;
-  margin-left: -2%;
-  opacity: 50%;
+.table .btn-success:hover {
+  background-color: #218838;
+}
+
+.table .btn-danger {
+  background-color: #dc3545;
+}
+
+.table .btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--hover-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .table-responsive {
+    border: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table tr {
+    margin-bottom: 15px;
+  }
+
+  .table td {
+    text-align: right;
+    padding-left: 50%;
+    text-align: right;
+    position: relative;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+}
+.table {
+  background: linear-gradient(145deg, #d5daeb, #a877e38a);
+  color: #fff; /* Ensure text color contrasts well against the background */
+  border-radius: 8px; /* Optional: Adds rounded corners for a softer look */
+  overflow: hidden; /* Keeps the child elements within the table's rounded corners */
+  color: black
+}
+
+.table thead {
+  background: rgba(255, 255, 255, 0.2); /* Slightly lighter shade for the header */
+}
+
+.table th, .table td {
+  border-color: rgba(255, 255, 255, 0.1); /* Subtle borders for differentiation */
+}
+
+/* Hover Effect for Rows - Optional */
+.table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+  .table td::before {
+    color: #fff; /* Ensure the pseudo-elements are also visible */
+  }
 }
 
 </style>

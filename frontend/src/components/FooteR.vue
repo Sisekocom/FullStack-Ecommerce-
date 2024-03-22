@@ -133,7 +133,6 @@ p {
 
 }
 
-/* Responsive Styles */
 @media (max-width: 768px) {
   .footer {
     padding: 4% !important;

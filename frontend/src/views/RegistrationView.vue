@@ -8,9 +8,7 @@
             <h2>Registration Form</h2>
           </div>
           <div class="card-body">
-            <form @submit.prevent="registrations">
-
-
+            <form>
               <div class="form-group">
                 <label for="firstname">First Name</label>
                 <input type="text" id="firstname" v-model="payload.firstName" class="form-control" required>
@@ -32,11 +30,10 @@
                 <input type="number" id="age" v-model="payload.userAge" class="form-control" required min="0">
               </div>
               <div class="form-group l">
-                <label for="userrole ">User Role</label>
+                <label for="userrole">User Role</label>
                 <select id="userrole" v-model="payload.userRole" class="form-control" required>
                   <option disabled value="">Please select one</option>
-                  <option>Admin</option>
-                  <option>User</option>
+                  <option value="user">User</option>
                 </select>
               </div>
               <div class="form-group m">
@@ -47,7 +44,8 @@
                 <label for="userpass">Password</label>
                 <input type="password" id="userpass" v-model="payload.userPass" class="form-control" required>
               </div>
-              <button type="submit" class="btn btn-primary btn-techy">Register</button>
+              <button type="button" @click="goBack" class="btn btn-secondary btn-techy">Back</button>
+              <button type="button" @click.prevent="registration" class="btn btn-primary btn-techy">Register</button>
             </form>
           </div>
         </div>
@@ -59,16 +57,14 @@
 <script>
 import NavBar from '../components/NavBar.vue';
 
-
 export default {
   data() {
     return {
       payload: {
-        // userID: '',
         firstName: '',
         lastName: '',
         gender: '',
-        userAge: null,
+        userAge: null,                      
         userRole: '',
         emailAdd: '',
         userPass: ''
@@ -79,37 +75,23 @@ export default {
     NavBar
   },
   methods: {
-    registrations() {
-      return this.$store.dispatch('register', this.payload)
+    registration() {
+      return this.$store.dispatch('register', this.payload);
+    },
+    goBack() {
+      this.$router.go(-1);
     }
   },
-  
-
 };
 </script>
-
-
-
-
 
 <style scoped>
 .container.mt-5 {
   max-width: 600px;
   margin-left: 33%;
 }
-.h{
-  margin-left: 2%;
-}
-.l{
-  margin-left: -5%;
-}
-.p{
+.h, .l, .p, .o, .m {
   margin-bottom: 20px;
-  margin-left: 8%;
-}
-.o{
-  margin-bottom: 20px;
-  margin-left: -2%;
 }
 
 .card.registration-card {
@@ -124,9 +106,7 @@ export default {
   padding: 20px;
   border-bottom: 1px solid #6c71c4;
 }
-.m{
-  margin-left: 8%;
-}
+
 .card-header h2 {
   margin: 0;
   font-size: 24px;
@@ -138,6 +118,7 @@ export default {
 
 label {
   font-weight: 600;
+  display: block; 
 }
 
 .form-control {
@@ -152,21 +133,26 @@ label {
   box-shadow: 0 0 0 2px #6c71c4;
 }
 
-.btn-primary.btn-techy {
-  background-color: #ff79c6;
+.btn-techy {
   border: none;
   border-radius: 10px;
   padding: 12px 30px;
   font-size: 18px;
   color: #fff;
-  margin-left: 15%;
-  
 }
 
-.btn-primary.btn-techy:hover {
+.btn-primary.btn-techy {
+  background-color: #ff79c6;
+  margin-left: 15%;
+}
+
+.btn-secondary.btn-techy {
+  background-color: #6272a4;
+  margin-right: 15%;
+}
+
+.btn-primary.btn-techy:hover, .btn-secondary.btn-techy:hover {
   background-color: #bd93f9;
 }
-label{
-  margin: 3%;
-}
 </style>
+

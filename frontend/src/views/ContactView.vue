@@ -1,77 +1,97 @@
 <template>
-    <NavbaAbout />
-    <div class="container py-5">
-      <div class="row">
-        <div class="col-md-8 mx-auto">
-          <div class="contact-form">
-            <h1 class="text-center mb-4">Contact Us</h1>
-            <p class="text-center">We're here to help and answer any question you might have. We look forward to hearing from you.</p>
-            <form action="https://formspree.io/f/xaygrooz" method="POST">
-              <div class="form-group row">
-                <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="firstName" name="first_name" required>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="lastName" name="surname" required>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="email" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
-                  <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="message" class="col-sm-2 col-form-label">Message</label>
-                <div class="col-sm-10">
-                  <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
-                </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-sm-10 offset-sm-2">
-                  <button type="submit" class="btn btn-primary">Send Message</button>
-                </div>
-              </div>
-            </form>
-          </div>
+  <NavbaAbout />
+  <div class="container-fluid py-5 contact-container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="contact-form">
+          <h1 class="text-center mb-4">Contact Us</h1>
+          <p class="text-center">We're here to help and answer any question you might have. We look forward to hearing from you.</p>
+          <form action="https://formspree.io/f/xaygrooz" method="POST">
+            <div class="form-group">
+              <input type="text" class="form-control" id="firstName" name="first_name" placeholder="First Name" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="lastName" name="surname" placeholder="Last Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" id="message" name="message" rows="4" placeholder="Message" required></textarea>
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-techy">Send Message</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  import NavbaAbout from '../components/NavbaAbout'
-  
-  export default {
-    components: {
-      NavbaAbout
-    },
-  };
-  </script>
-  
-  <style scoped>
-    .contact-form {
-      background-color: #f9f9f9;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-      opacity: 75%;
-    }
-    .contact-form h1 {
-      font-size: 30px;
-      color: #333;
-    }
-    .contact-form p {
-      font-size: 16px;
-      color: #666;
-      margin-bottom: 30px;
-    }
-    label{
-       color: black;
-    }
-  </style>
-  
+  </div>
+</template>
+
+<script>
+import NavbaAbout from '../components/NavbaAbout'
+
+export default {
+  components: {
+    NavbaAbout
+  },
+};
+</script>
+
+<style scoped>
+/* Base styles */
+.contact-container {
+  background-image: url('');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+.contact-form {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form h1,
+.contact-form p {
+  color: #007bff;
+}
+.form-control {
+  background: none;
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  color: #040404;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.form-control::placeholder {
+  color: #007bff;
+}
+
+.form-control:focus {
+  border-color: #0056b3;
+  box-shadow: none;
+}
+.btn-techy {
+  background-image: linear-gradient(to right, #0062E6, #33AEFF);
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn-techy:hover {
+  transform: scale(1.05);
+}
+
+.text-center {
+  color: #007bff;
+}
+</style>

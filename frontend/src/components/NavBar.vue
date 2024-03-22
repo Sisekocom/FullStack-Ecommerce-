@@ -6,12 +6,12 @@
           <div class="navbar-nav ml-auto">
             <!-- <router-link class="nav-item nav-link KK" to="/Faq"> FAQ</router-link> -->
             <!-- <router-link class="nav-item nav-link KK" to="/checkout">Orders </router-link> -->
-            <router-link class="nav-item nav-link KK" to="/registration">Register</router-link>
+            <!-- <router-link class="nav-item nav-link KK" to="/registration">Register</router-link> -->
             <!-- <router-link class="nav-item nav-link KK" to="/about">ABOUT</router-link> -->
             <!-- <router-link class="nav-item nav-link KK" to="/"> HOME </router-link> -->
             <!-- <router-link class="nav-item nav-link yK v-show=products" to="/Login"> LOG</router-link> -->
            
-        <img height="90px" width="90px" src="https://i.postimg.cc/d0bpKTM7/R-removebg-preview-1.png" alt="Logo">
+       <router-link to="/" > <img height="180px" width="180px" src="https://i.postimg.cc/s2ynVcsy/3-D-metallic-Logo-mockup-on-Black-Wall-Surface.jpg" alt="Logo"></router-link>
       
         
         
@@ -57,11 +57,12 @@ a:hover, .navbar-brand:hover {
 }
 
 img {
-  margin-top: -1% !important;
+  margin-top: 1% !important;
   transform: translateY(-8px);
   transition: all 0.40s ease;
  transform: scale(1.3);
-   margin-right: 3000px;
+   margin-right: 590px;
+   border-radius: 60%;
 }
 
 img:hover {

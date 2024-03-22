@@ -56,13 +56,13 @@ font-size: 1.05rem;
 font-weight: bold;
 margin-right: 20px;
 transition: color 0.4s ease-in-out, transform 0.3s ease;
-color: rgba(255, 255, 255, 0.75) !important; /* Subtle color */
+color: rgba(255, 255, 255, 0.75) !important; 
 text-transform: uppercase;
 letter-spacing: 1px;
 }
 
 .nav-item.nav-link:hover, .nav-item.nav-link:focus {
-color: #ffffff !important; /* Brighter on hover */
+color: #ffffff !important; 
 background-color: transparent;
 transform: scale(1.05);
 }

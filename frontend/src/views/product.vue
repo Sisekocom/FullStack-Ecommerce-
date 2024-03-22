@@ -11,13 +11,12 @@
         <p class="product-description">{{ product.description }}</p>
         <div class="button-group">
           <button class="btn btn-danger" @click="goBack">Back</button>
-          <button class="btn btn-primary" @click="addToCart">Add to Cart</button>
+          <button class="btn btn-primary" @click.prevent="addingToCart(product)">Add to Cart</button>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import NavbaAbout from '../components/NavbaAbout.vue';
 
@@ -33,14 +32,15 @@ export default {
     goBack() {
       this.$router.go(-1); 
     },
-    addToCart() {
-      console.log('Product added to cart');
-    }
+    addingToCart(product){
+      this.$store.dispatch('addCart', product)
+    } 
   },
   mounted() {
     this.$store.dispatch('fetchProduct', this.$route.params);
-  }
-}
+  }}
+ 
+
 </script>
 
 <style scoped>

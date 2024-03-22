@@ -1,6 +1,5 @@
-
 <template >
-<NavBar />
+<NavBBar />
 <div class="container">
   <div class=" mt-2">
     <div class="row justify-content-center">
@@ -30,13 +29,13 @@
 </template>
 <script>
 
-import NavBar from '../components/NavBar.vue';
+import NavBBar from '../components/NavBBar.vue';
 
 
 export default {
   name: 'LoginView',
   components: {
-    NavBar
+    NavBBar
   },
   data() {
     return {
@@ -48,22 +47,23 @@ export default {
   },
   methods: {
     async log() {
-      try {
-        await this.$store.dispatch("login", this.payload);
-      } catch (error) {
-        console.error(error);
-      }
-       {
-      this.$store.commit('login');
-      const redirect = this.$route.query.redirect || '/';
-      this.$router.push(redirect);
-    }
-    }
-  },
+            try {
+              await this.$store.dispatch("login", this.payload);
+             this.$store.commit('login')
+              const redirect = this.$route.query.redirect || '/';
+              this.$router.push(redirect);
+            }  catch (error) {
+              console.error(error);
+            }
+          }
+        }
 };
 </script>
 
 <style scoped>
+body{
+  overflow-x: hidden;
+}
 .login-card {
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
